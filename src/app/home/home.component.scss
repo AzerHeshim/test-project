@@ -1,0 +1,265 @@
+@import "../ui-elements/base/variables";
+
+.home{
+  width: 100vw;
+  height: 100vh;
+  background: url("../../assets/images/home_banner.jpg") no-repeat center;
+  background-size: cover;
+  position: relative;
+}
+
+.home_header{
+  height: 72px;
+  width: 100%;
+  background: $grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-bottom: 32px;
+  img{
+    cursor: pointer;
+  }
+}
+
+.with_badge{
+  position: relative;
+}
+
+.badge{
+  width: 21px;
+  height: 21px;
+  border-radius: 24px;
+  background: $red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  span{
+    color: $white;
+    font-family: $outfit_regular;
+  }
+}
+
+.home_footer{
+  position: absolute;
+  bottom: 0;
+  height: 72px;
+  width: 100%;
+  background: $grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+.footer_content{
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .with_badge .badge{
+    top: -7px;
+    right: -7px;
+  }
+  img{
+    cursor: pointer;
+  }
+}
+
+.home_content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content_header{
+  font-size: $h1-font-size;
+  line-height: $h1-line-height;
+  color: $white;
+  margin-bottom: 40px;
+}
+.main_content{
+  width: 65%;
+  height: 560px;
+  background: $white;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+}
+.content_visuals, .content_form{
+  width: 50%;
+  overflow: hidden;
+}
+.content_visuals{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 100%;
+  position: relative;
+}
+.visual{
+  img{
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.distance{
+  padding: 8px 16px;
+  background: #07000060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  span{
+    font-size: $p4-font-size;
+    line-height: $p4-line-height;
+    color: $white;
+  }
+}
+
+$radius: 25px;
+.bubble {
+  mask-image:
+    radial-gradient(#fff ($radius - 0.5), #fff0 $radius), // Top left corner
+    radial-gradient(#fff ($radius - 0.5), #fff0 $radius), // Top right corner
+    radial-gradient(#fff ($radius - 0.5), #fff0 $radius), // Bottom left corner
+    radial-gradient(#fff ($radius - 0.5), #fff0 $radius), // Bottom right corner
+    linear-gradient(#fff, #fff), // Horizontal gradient
+    linear-gradient(#fff, #fff), // Vertical gradient
+    url('data:image/svg+xml;utf8,<svg width="39" height="25" viewBox="0 0 39 25" xmlns="http://www.w3.org/2000/svg"><path d="M38.4998 24.5C27.6998 22.1 22.9998 7.5 21.9998 0.5C11.8331 1.83333 -6.30022 6.3 2.49978 13.5C13.4998 22.5 21.9998 24.5 38.4998 24.5Z" /></svg>'); // Bottom right icon
+  mask-position:
+    0 0, // Top left corner
+    100% 0, // Top right corner
+    0 100%, // Bottom left corner
+    100% 100%, // Bottom right corner
+    0 $radius, // Horizontal gradient
+    $radius 0, // Vertical gradient
+    100% 100%; // Bottom right icon
+  mask-size:
+      ($radius * 2) ($radius * 2),  // Top left corner
+      ($radius * 2) ($radius * 2),  // Top right corner
+      ($radius * 2) ($radius * 2),  // Bottom left corner
+      ($radius * 2) ($radius * 2),  // Bottom right corner
+    100% calc(100% - #{$radius * 2}),  // Horizontal gradient
+    calc(100% - #{$radius * 2}) 100%,  // Vertical gradient
+      (39px / 2) (25px / 2); // Bottom right icon
+  mask-repeat: no-repeat;
+  margin-bottom: 15px;
+  max-width: 60%;
+  width: fit-content;
+  font-size: 0; // Prevent white space under the images
+  @media (max-width: 600px) {
+    max-width: 80%;
+  }
+  &.left {
+    background: #E9E9EB;
+    mask-image:
+      radial-gradient(#fff, #fff ($radius - 0.5), transparent $radius), // Top left radius
+      radial-gradient(#fff, #fff ($radius - 0.5), transparent $radius), // Top right radius
+      radial-gradient(#fff, #fff ($radius - 0.5), transparent $radius), // Bottom left radius
+      radial-gradient(#fff, #fff ($radius - 0.5), transparent $radius), // Bottom right radius
+      linear-gradient(#fff, #fff), // Horizontal gradient
+      linear-gradient(#fff, #fff), // Vertical gradient
+      url('data:image/svg+xml;utf8,<svg width="39" height="24" viewBox="0 0 39 24" xmlns="http://www.w3.org/2000/svg"><path d="M0.000217438 24C10.8002 21.6 15.5002 7 16.5002 0C26.6669 1.33333 44.8002 5.8 36.0002 13C25.0002 22 16.5002 24 0.000217438 24Z" /></svg>'); // Bottom left icon
+    mask-position:
+      0 0, // Top left radius
+      100% 0, // Top right radius
+      0 100%, // Bottom left radius
+      100% 100%, // Bottom right radius
+      0 $radius, // Horizontal gradient
+      $radius 0, // Vertical gradient
+      0 100%; // Bottom right icon
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    position: relative;
+    font-size: 17px;
+    line-height: 1.2;
+    font-family: sans-serif;
+    padding: 15px 15px;
+    margin: 0;
+    letter-spacing: 0.02em;
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.imessage{
+  position: absolute;
+  bottom: 10px;
+  left: 25px;
+}
+
+.desktop{
+  display: block;
+}
+.mobile{
+  display: none;
+}
+
+.home_advantages{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+.advantages_item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+  width: 70px;
+  img{
+    margin-bottom: 16px;
+  }
+  p{
+    font-size: $p5-font-size;
+    text-align: center;
+    color: $white;
+    line-height: $p5-line-height;
+  }
+}
+
+.content_form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.content_form_head{
+  font-size: $h2-font-size;
+  line-height: $h2-line-height;
+}
+
+@media (max-width: 768px) {
+  .desktop{
+    display: none;
+  }
+  .mobile{
+    display: block;
+  }
+  .home_header img {
+    width: 32px;
+  }
+  .home_header .with_badge {
+    .badge {
+      top: -7px;
+      right: -9px;
+    }
+  }
+  .footer_content{
+    width: 100%;
+  }
+}
+
