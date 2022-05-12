@@ -8,6 +8,7 @@ import {NgSelectConfig} from "@ng-select/ng-select";
 })
 export class HomeComponent implements OnInit {
   selectedCar: number | undefined;
+  activeStepIndex = 0;
 
   cars = [
     { id: 1, name: 'London' },
@@ -29,4 +30,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  next(e: any) {
+    console.log('-----------');
+
+    if (this.activeStepIndex !== 6) {
+      e.next();
+    }
+  }
 }

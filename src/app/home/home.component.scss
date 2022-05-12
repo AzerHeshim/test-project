@@ -473,7 +473,15 @@ $md-checkbox-label-padding: .75em;
 
 }
 
-
+::ng-deep.stepper-header {
+  display: none;
+}
+::ng-deep.stepper-body{
+  margin: 0 auto !important;
+}
+.ng_input{
+  margin-bottom: 24px;
+}
 @media (max-width: 768px) {
   .desktop{
     display: none;
