@@ -556,7 +556,7 @@ $md-checkbox-label-padding: .75em;
     width: 100%;
   }
   ::ng-deep .ng-select {
-    width: 100%;
+    width: 100% !important;
     margin: 0 auto;
   }
   .next {
