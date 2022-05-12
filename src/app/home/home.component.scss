@@ -509,5 +509,67 @@ $md-checkbox-label-padding: .75em;
   .step_header{
     color: $white;
   }
+  .home{
+    height: auto;
+  }
+  .home_footer{
+    position: relative;
+  }
+  .content_form_head{
+    color: $white;
+  }
+  .content_visuals, .content_form{
+    width: 100%;
+  }
+  .content_header {
+    font-size: 28px;
+    line-height: 44px;
+    color: #FFFFFF;
+    width: 85%;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+  .content_form_head {
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 24px;
+  }
+  .step_header {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .content_visuals{
+    height: auto;
+  }
+.distance{
+  position: absolute;
+}
+  .home_advantages {
+    gap: 56px;
+    margin-bottom: 40px;
+  }
+  .main_content{
+    height: auto;
+  }
+  .input_item {
+    width: 100%;
+  }
+  ::ng-deep .ng-select {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .next {
+    width: 100%;
+  }
+  .md-checkbox label {
+  color: $white;
+  }
+  .md-checkbox{
+    width: 100%;
+  }
+  .footer_content img{
+    width: 32px;
+  }
 }
 
