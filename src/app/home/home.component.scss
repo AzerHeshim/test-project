@@ -17,9 +17,6 @@
   justify-content: space-between;
   padding: 0 24px;
   margin-bottom: 32px;
-  img{
-    cursor: pointer;
-  }
 }
 
 .with_badge{
@@ -63,9 +60,7 @@
     top: -7px;
     right: -7px;
   }
-  img{
-    cursor: pointer;
-  }
+
 }
 
 .home_content{
@@ -105,6 +100,7 @@
   img{
     object-fit: cover;
     width: 100%;
+    height: 100%;
   }
 }
 
@@ -115,6 +111,7 @@
   align-items: center;
   justify-content: center;
   width: fit-content;
+  position: absolute;
   span{
     font-size: $p4-font-size;
     line-height: $p4-line-height;
@@ -240,6 +237,9 @@ $radius: 25px;
   justify-content: center;
   flex-direction: column;
   padding: 0 32px;
+  height: 100%;
+  position: relative;
+  overflow: visible;
 }
 .content_form_head{
   font-size: $h2-font-size;
@@ -355,7 +355,6 @@ $radius: 25px;
 }
 .next{
   width: 70%;
-  margin: 32px auto;
   height: 50px;
   display: flex;
   align-items: center;
@@ -368,22 +367,9 @@ $radius: 25px;
   outline: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 0;
+  margin: 0 auto;
 }
 
-$md-checkbox-checked-color: rgb(51, 122, 183);
-$md-checkbox-border-color: rgba(0, 0, 0, 0.54);
-$md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
-$md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
-
-$md-checkbox-margin: 1em 0;
-$md-checkbox-size: 1.25em;
-$md-checkbox-padding: .25em;
-$md-checkbox-border-width: 2px;
-$md-checkbox-border-radius: 0.125em;
-$md-checkmark-width: 0.125em;
-$md-checkmark-color: #fff;
-$md-checkbox-label-padding: .75em;
 
 .md-checkbox {
   position: relative;
@@ -482,6 +468,53 @@ $md-checkbox-label-padding: .75em;
 .ng_input{
   margin-bottom: 24px;
 }
+.arrowed{
+  position: absolute;
+  top: -18px;
+  display: flex;
+  img{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+  }
+}
+
+.step_nine{
+  position: relative;
+  top: 22px
+}
+
+.validation{
+  width: 70%;
+  margin: 0 auto 24px;
+  color: red;
+}
+.birthday{
+  width: 70%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  -moz-appearance:textfield; /* Firefox */
+  input{
+    width: 100%;
+  }
+
+}
+.label{
+  width: 70%;
+  margin: 16px auto;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.disable{
+  background: grey;
+  pointer-events: none;
+}
 @media (max-width: 768px) {
   .desktop{
     display: none;
@@ -503,11 +536,8 @@ $md-checkbox-label-padding: .75em;
   }
   .main_content{
     width: 100%;
-    background: transparent;
+    background: #fff;
     flex-direction: column-reverse;
-  }
-  .step_header{
-    color: $white;
   }
   .home{
     height: auto;
@@ -515,16 +545,12 @@ $md-checkbox-label-padding: .75em;
   .home_footer{
     position: relative;
   }
-  .content_form_head{
-    color: $white;
-  }
   .content_visuals, .content_form{
     width: 100%;
   }
   .content_header {
     font-size: 28px;
     line-height: 44px;
-    color: #FFFFFF;
     width: 85%;
     margin: 0 auto 24px;
     text-align: center;
@@ -536,7 +562,7 @@ $md-checkbox-label-padding: .75em;
   }
   .step_header {
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     text-align: center;
   }
   .content_visuals{
@@ -570,6 +596,15 @@ $md-checkbox-label-padding: .75em;
   }
   .footer_content img{
     width: 32px;
+  }
+  .content_header{
+    display: none;
+  }
+  .arrowed{
+    position: relative;
+    img{
+      width: 90%
+    }
   }
 }
 

@@ -7,10 +7,10 @@ import {NgSelectConfig} from "@ng-select/ng-select";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  selectedCar: number | undefined;
+  selectedCity: number | undefined;
   activeStepIndex = 0;
-
-  cars = [
+  addressAdded= true;
+  cities = [
     { id: 1, name: 'London' },
     { id: 2, name: 'Brighton' },
     { id: 3, name: 'Edinburgh' },
@@ -19,21 +19,23 @@ export class HomeComponent implements OnInit {
   constructor(private config: NgSelectConfig) {
     this.config.notFoundText = 'Custom not found';
     this.config.appendTo = 'body';
-    // set the bindValue to global config when you use the same
-    // bindValue in most of the place.
-    // You can also override bindValue for the specified template
-    // by defining `bindValue` as property
-    // Eg : <ng-select bindValue="some-new-value"></ng-select>
     this.config.bindValue = 'value';
   }
 
   ngOnInit(): void {
   }
 
-  next(e: any) {
-    console.log('-----------');
 
-    if (this.activeStepIndex !== 6) {
+next(e: any) {
+
+  this.activeStepIndex = e.selectedIndex;
+  console.log(this.activeStepIndex ,this.selectedCity)
+  if (this.activeStepIndex === 4 && this.selectedCity === undefined){
+    console.log(this.activeStepIndex ,this.selectedCity)
+    this.addressAdded = false
+    } else {
+    console.log(this.activeStepIndex ,this.selectedCity)
+    this.addressAdded = true;
       e.next();
     }
   }

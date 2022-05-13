@@ -18,22 +18,60 @@
       <div class="content_visuals">
         <div class="visual">
           <div class="distance">
-            <span>2 km away</span>
+            <span *ngIf="activeStepIndex === 0">2 km away</span>
+            <span *ngIf="activeStepIndex === 1">13 km away</span>
+            <span *ngIf="activeStepIndex === 2">6 km away</span>
+            <span *ngIf="activeStepIndex === 3">7 km away</span>
+            <span *ngIf="activeStepIndex === 4">2 km away</span>
+            <span *ngIf="activeStepIndex === 5">0.5 km away</span>
+            <span *ngIf="activeStepIndex === 6">4 km away</span>
+            <span *ngIf="activeStepIndex === 7">5.1 km away</span>
+            <span *ngIf="activeStepIndex === 8">2 km away</span>
+            <span *ngIf="activeStepIndex === 9">6 km away</span>
           </div>
-          <img src="assets/images/female1.jpg" alt="">
+          <img *ngIf="activeStepIndex === 0" src="assets/images/female7.jpg" alt="">
+          <img *ngIf="activeStepIndex === 1" src="assets/images/female55.svg" alt="">
+          <img *ngIf="activeStepIndex === 2" src="assets/images/female5.jpg" alt="">
+          <img *ngIf="activeStepIndex === 3" src="assets/images/female1.jpg" alt="">
+          <img *ngIf="activeStepIndex === 4" src="assets/images/female10.jpg" alt="">
+          <img *ngIf="activeStepIndex === 5" src="assets/images/female12.jpg" alt="">
+          <img *ngIf="activeStepIndex === 6" src="assets/images/female14.jpg" alt="">
+          <img *ngIf="activeStepIndex === 7" src="assets/images/female16.jpg" alt="">
+          <img *ngIf="activeStepIndex === 8" src="assets/images/female18.jpg" alt="">
+          <img *ngIf="activeStepIndex === 9" src="assets/images/female20.jpg" alt="">
           <div class="bubble left imessage">
-            <p>I'm hungry, let's get pizza</p>
+            <p *ngIf="activeStepIndex === 0">I'm hungry, let's get pizza</p>
+            <p *ngIf="activeStepIndex === 1">Wanna party till dawn?</p>
+            <p *ngIf="activeStepIndex === 2">Come over, bring snacks</p>
+            <p *ngIf="activeStepIndex === 3">I have some good wine at my place..</p>
+            <p *ngIf="activeStepIndex === 4">My TV is broke, can you come help?</p>
+            <p *ngIf="activeStepIndex === 5">My Parents went to vacation. Let's party!</p>
+            <p *ngIf="activeStepIndex === 6">I'm so bored..</p>
+            <p *ngIf="activeStepIndex === 7">I need a favor..</p>
+            <p *ngIf="activeStepIndex === 8">Come over</p>
+            <p *ngIf="activeStepIndex === 9">Let's party</p>
           </div>
         </div>
         <div class="visual">
-          <img src="assets/images/female2.jpg" alt="">
+          <img *ngIf="activeStepIndex === 0" src="assets/images/female13.jpg" alt="">
+          <img *ngIf="activeStepIndex === 1" src="assets/images/female32.svg" alt="">
+          <img *ngIf="activeStepIndex === 2" src="assets/images/female6.jpg" alt="">
+          <img *ngIf="activeStepIndex === 3" src="assets/images/female8.jpg" alt="">
+          <img *ngIf="activeStepIndex === 4" src="assets/images/female11.jpg" alt="">
+          <img *ngIf="activeStepIndex === 5" src="assets/images/female2.jpg" alt="">
+          <img *ngIf="activeStepIndex === 6" src="assets/images/female15.jpg" alt="">
+          <img *ngIf="activeStepIndex === 7" src="assets/images/female17.jpg" alt="">
+          <img *ngIf="activeStepIndex === 8" src="assets/images/female19.jpg" alt="">
+          <img *ngIf="activeStepIndex === 9" src="assets/images/female21.jpg" alt="">
         </div>
       </div>
       <div class="content_form">
-        <p class="content_form_head">Sign up with just a few click: </p>
+        <div class="arrowed">
+          <img src="assets/images/arrow.svg" alt="">
+        </div>
 <!--        <form action="" class="form">-->
         <ng-stepper #cdkStepper [linear]="true" >
-          <cdk-step  [optional]="true">
+          <cdk-step #activeStepIndex0  [optional]="true">
             <ng-template cdkStepLabel>
               <div class="step-bullet">1</div>
               <div class="step-title">Pickup Point <span class="required">*</span></div>
@@ -121,14 +159,14 @@
               <div class="step-title">Parcel
                 Info</div>
             </ng-template>
-
-                                            <div class="step_five">
-                                              <p class="step_header">Your location:</p>
-                                              <ng-select [(ngModel)]="selectedCar" [appearance]="'outline'" class="ng-select ng_input" [placeholder]="'Enter city name'">
-                                                <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
-                                              </ng-select>
-                                              <button class="next" (click)="next(cdkStepper)">Next</button>
-                                            </div>
+            <div class="step_five">
+              <p class="step_header">Your location:</p>
+              <ng-select [(ngModel)]="selectedCity" [appearance]="'outline'" class="ng-select ng_input" [placeholder]="'Enter city name'">
+                <ng-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</ng-option>
+              </ng-select>
+              <p *ngIf="!addressAdded && !selectedCity" class="validation">Please provide address</p>
+              <button class="next"  [ngClass]="!addressAdded ? 'disable' : 'next'" (click)="next(cdkStepper)">Next</button>
+            </div>
           </cdk-step>
           <cdk-step [optional]="true">
             <ng-template cdkStepLabel>
@@ -140,7 +178,7 @@
                     <div class="step_six">
                       <p class="step_header">Your username and password:</p>
                       <input type="text" class="input_item" placeholder="Username">
-                      <input type="text" class="input_item" placeholder="Password">
+                      <input type="password" class="input_item" placeholder="Password">
                       <button class="next" (click)="next(cdkStepper)">Next</button>
                     </div>
           </cdk-step>
@@ -153,7 +191,11 @@
 
                     <div class="step_seven">
                       <p class="step_header">Your birthday :</p>
-                      <input type="date" class="input_item" placeholder="Your birthday:">
+                      <div class="birthday">
+                        <input class="input_item" type="number" placeholder="01" >
+                        <input class="input_item" type="number" placeholder="01" >
+                        <input class="input_item" type="number" placeholder="2000" >
+                      </div>
                       <button class="next" (click)="next(cdkStepper)">Next</button>
                     </div>
           </cdk-step>
@@ -166,6 +208,9 @@
                     <div class="step_eight">
                       <p class="step_header">And lastly, What’s your email?</p>
                       <input type="email" class="input_item" placeholder="mail@mail.com">
+                      <p class="label">In order to avoid fake
+                        profiles, we send you an email to confirm your profile
+                      </p>
                       <button class="next" (click)="next(cdkStepper)">Next</button>
                     </div>
           </cdk-step>
@@ -177,8 +222,8 @@
             </ng-template>
                     <div class="step_nine">
                       <p class="step_header">Confirm your username & password</p>
-                      <input type="text" class="input_item" placeholder="Username" value="KurtCobain">
-                      <input type="email" class="input_item" placeholder="Username" value="mail@mail.com">
+                      <input disabled type="text" class="input_item" placeholder="Username" value="KurtCobain">
+                      <input disabled type="email" class="input_item" placeholder="Username" value="mail@mail.com">
                       <div class="md-checkbox">
                         <input id="i2" type="checkbox" >
                         <label for="i2">I certify that I am over 18 years old, and I have read and accept the Terms of Use and our Privacy Policy</label>
