@@ -1,10 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {NgSelectConfig} from "@ng-select/ng-select";
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({opacity:0, width: "100%", height: "0",  'object-fit': "cover"}),
+        animate(500, style({opacity:1, width: "100%", height: "100%"}))
+      ]),
+      transition(':leave', [
+        animate(500, style({opacity:0,  width: "100%", height: "0"}))
+      ])
+    ])
+  ],
 })
 export class HomeComponent implements OnInit {
   selectedCity: number | undefined;
