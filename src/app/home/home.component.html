@@ -192,9 +192,9 @@
                     <div class="step_seven">
                       <p class="step_header">Your birthday :</p>
                       <div class="birthday">
-                        <input class="input_item" type="number" placeholder="01" >
-                        <input class="input_item" type="number" placeholder="01" >
-                        <input class="input_item" type="number" placeholder="2000" >
+                        <input class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="01" >
+                        <input class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="01" >
+                        <input class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="2000" >
                       </div>
                       <button class="next" (click)="next(cdkStepper)">Next</button>
                     </div>
