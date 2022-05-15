@@ -609,9 +609,6 @@ input::-webkit-inner-spin-button {
   .next {
     width: 100%;
   }
-  .md-checkbox label {
-  color: $white;
-  }
   .md-checkbox{
     width: 100%;
   }
@@ -626,6 +623,15 @@ input::-webkit-inner-spin-button {
     img{
       width: 90%
     }
+  }
+  .label{
+    width: 100%;
+  }
+  .birthday{
+    width: 100%;
+  }
+  .step_nine{
+    top: 0;
   }
 }
 
