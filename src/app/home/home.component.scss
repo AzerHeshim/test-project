@@ -6,6 +6,9 @@
   background: url("../../assets/images/home_banner.jpg") no-repeat center;
   background-size: cover;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .home_header{
@@ -41,7 +44,7 @@
 }
 
 .home_footer{
-  position: absolute;
+  //position: absolute;
   bottom: 0;
   height: 72px;
   width: 100%;
@@ -95,8 +98,14 @@
   gap: 0;
   height: 100%;
   position: relative;
+  border: 9px solid lightgrey;
+  border-radius: 4px;
+  background: lightgray;
+  margin-left: auto;
 }
 .visual{
+  width: 100%;
+  position: relative;
   img{
     object-fit: cover;
     width: 100%;
@@ -106,6 +115,8 @@
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
     animation-duration: 1s;
+    position: absolute;
+    z-index: 0;
   }
   .images{
     width: 100%;
@@ -114,6 +125,7 @@
 }
 
 .distance{
+  z-index: 1;
   padding: 8px 16px;
   background: #07000060;
   display: flex;
@@ -121,6 +133,10 @@
   justify-content: center;
   width: fit-content;
   position: absolute;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
   span{
     font-size: $p4-font-size;
     line-height: $p4-line-height;
@@ -156,7 +172,7 @@ $radius: 25px;
       (39px / 2) (25px / 2); // Bottom right icon
   mask-repeat: no-repeat;
   margin-bottom: 15px;
-  max-width: 60%;
+  max-width: 72%;
   width: fit-content;
   font-size: 0; // Prevent white space under the images
   @media (max-width: 600px) {
@@ -633,5 +649,13 @@ input::-webkit-inner-spin-button {
   .step_nine{
     top: 0;
   }
+  .visual img{
+    position: relative;
+  }
 }
 
+@media (min-width: 2000px) {
+  .main_content{
+    height: 900px;
+  }
+}

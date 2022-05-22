@@ -15,18 +15,18 @@
   <div class="home_content">
     <h2 class="content_header">Ready to meet single ladies?</h2>
     <div class="main_content">
-      <div class="content_visuals" *ngIf="activeStepIndex !== null">
-        <div class="visual">
+      <div class="content_visuals" >
+        <div class="visual" *ngIf="activeStepIndex !== null">
           <div class="distance" >
             <span >{{distances[activeStepIndex].name}}</span>
           </div>
-            <img   [src]="leftImages[activeStepIndex].src" alt="">
+            <img loading="lazy"  [src]="leftImages[activeStepIndex].src" alt="">
           <div class="bubble left imessage">
             <p >{{bubbles[activeStepIndex].name}}</p>
           </div>
         </div>
-        <div class="visual">
-            <img   [src]="rightImages[activeStepIndex].src" alt="">
+        <div class="visual" *ngIf="activeStepIndex !== null">
+            <img loading="lazy"  [src]="rightImages[activeStepIndex].src" alt="">
         </div>
       </div>
       <div class="content_form">
