@@ -364,6 +364,11 @@ $radius: 25px;
   display: flex !important;
   align-items: center !important;
   top: 0 !important;
+  font-size: 17px !important;
+}
+
+::ng-deep .ng-select .ng-select-container .ng-value-container .ng-input>input{
+  font-size: 17px !important;
 }
 
 ::ng-deep
