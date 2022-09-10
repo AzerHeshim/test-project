@@ -33,175 +33,210 @@
         <div class="arrowed">
           <img src="assets/images/arrow.svg" alt="">
         </div>
-<!--        <form action="" class="form">-->
-        <ng-stepper #cdkStepper [linear]="true" >
-          <cdk-step #activeStepIndex0  [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">1</div>
-              <div class="step-title">Pickup Point <span class="required">*</span></div>
-            </ng-template>
-            <div class="step_one">
-              <p class="step_header">What’s your gender?</p>
-              <div class="gender_options">
-                <div class="gender_option_item"  (click)="next(cdkStepper)">
-                  <img src="assets/icons/fa-solid_male.svg" alt="">
-                  <p>Male</p>
-                </div>
-                <div class="gender_option_item" (click)="next(cdkStepper)">
-                  <img src="assets/icons/fa-solid_female.svg" alt="">
-                  <p>Female</p>
+        <form [formGroup]="registrationForm" >
+          <ng-stepper #cdkStepper [linear]="true" [selectedIndex]="activeStepIndex">
+            <cdk-step #activeStepIndex0  [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet" [id]="activeStepIndex === 6 ? 'non_cursor' : ''">1</div>
+              </ng-template>
+              <div class="step_one">
+                <p class="step_header">{{ 'dialog.stepAdult' | translate }}</p>
+                <p class="step_header">{{ 'dialog.checkAdult' | translate }}</p>
+                <button class="stepper_generic first_step" (click)="next(cdkStepper)">{{ 'dialog.proceed' | translate }} </button>
+              </div>
+
+            </cdk-step>
+
+            <cdk-step  [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet" [id]="activeStepIndex === 6 ? 'non_cursor' : ''">2</div>
+              </ng-template>
+              <div class="step_two">
+                <p class="step_header">{{ 'dialog.gender' | translate }} </p>
+                <div class="gender_options">
+                  <button class="gender_option_item stepper_generic"  (click)="next(cdkStepper); onSelectGender(true)"  >
+                    <!--                <p formControlName="gender">Male</p>-->
+                    <label class="pointer">{{ 'dialog.male' | translate }}</label>
+                    <input class="d-none" type="text" [value]="'Male'" formControlName="gender" readonly style="border:0">
+                  </button>
+                  <button class="gender_option_item stepper_generic" (click)="next(cdkStepper); onSelectGender(false)" >
+                    <label>{{ 'dialog.female' | translate }}</label>
+                    <input class="d-none" type="text" [value]="'Female'" formControlName="gender" readonly style="border:0">
+                  </button>
                 </div>
               </div>
-            </div>
+            </cdk-step>
 
-          </cdk-step>
-
-          <cdk-step  [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">2</div>
-              <div class="step-title">Delivery Point</div>
-            </ng-template>
-            <div class="step_two">
-              <p class="step_header">Have you ever hooked up with someone online before? </p>
-              <div class="gender_options">
-                <div class="gender_option_item" (click)="next(cdkStepper)">
-                  <img src="assets/icons/ant-design_check-circle-outlined.svg" alt="">
-                  <p>Yes</p>
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet" [id]="activeStepIndex === 6 ? 'non_cursor' : ''">3</div>
+              </ng-template>
+              <div class="step_three">
+                <p class="step_header">{{ 'dialog.birthday' | translate }}</p>
+                <div class="birthday">
+                  <input [ngClass]="validateDayBorder()" class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="{{ 'dialog.dd' | translate }}" min="0" max="31" formControlName="day" appTwoDigitDecimaNumber [(ngModel)]="day" (ngModelChange)="checkDaysInmonth(); checkDays()" >
+                  <input [ngClass]="validateMonthBorder()" class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="{{ 'dialog.mm' | translate }}" min="0"  max="12" formControlName="month" appTwoDigitDecimaNumber [(ngModel)]="month" (ngModelChange)="checkDaysInmonth(); checkMonths()">
+                  <input [ngClass]="validateYearBorder()" class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="{{ 'dialog.yyyy' | translate }}" min="1900" max="2004" formControlName="year" appFourDigitDecimaNumber [(ngModel)]="year" (ngModelChange)="ageDIff(); checkDaysInmonth(); checkYears()">
                 </div>
-                <div class="gender_option_item" (click)="next(cdkStepper)">
-                  <img src="assets/icons/ic_outline-cancel.svg" alt="">
-                  <p>No</p>
+                <div class="validate" *ngIf="(registrationForm.get('day')?.invalid && (registrationForm.get('day')?.dirty || registrationForm.get('day')?.touched)) ">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.dayValidation' | translate }}
                 </div>
-              </div>
-            </div>
-          </cdk-step>
-
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
-            <div class="step_three">
-              <p class="step_header">Do you want to receive private pictures?</p>
-              <div class="gender_options">
-                <div class="gender_option_item" (click)="next(cdkStepper)">
-                  <img src="assets/icons/ant-design_check-circle-outlined.svg" alt="">
-                  <p>Yes</p>
+                <div class="validate" *ngIf="registrationForm.get('month')?.invalid && (registrationForm.get('month')?.dirty || registrationForm.get('month')?.touched)">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt=""> {{ 'dialog.monthValidation' | translate }}
                 </div>
-                <div class="gender_option_item" (click)="next(cdkStepper)">
-                  <img src="assets/icons/ic_outline-cancel.svg" alt="">
-                  <p>No</p>
+                <div class="validate" *ngIf="!this.isLegal">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.yearValidation' | translate }}
+                </div>
+                <div class="gender_options">
+                  <button class="gender_option_item stepper_generic stepper_back"  (click)="back(cdkStepper)">
+                    <p>{{ 'dialog.back' | translate }}</p>
+                  </button>
+                  <button class="gender_option_item stepper_generic" (click)="next(cdkStepper); setDOB(); ageDIff()"  [ngClass]="{ disabled_button: (registrationForm.get('day')?.invalid || registrationForm.get('month')?.invalid  || registrationForm.get('year')?.invalid) || (!isLegitMonth)}"
+                          [disabled]="(registrationForm.get('day')?.invalid || registrationForm.get('month')?.invalid  || registrationForm.get('year')?.invalid) || (!isLegitMonth)">
+                    <p>{{ 'dialog.next' | translate }}</p>
+                  </button>
                 </div>
               </div>
-            </div>
-          </cdk-step>
+            </cdk-step>
 
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
-                                  <div class="step_four">
-                                    <p class="step_header">What’re you looking for</p>
-                                    <div class="gender_options">
-                                      <div class="gender_option_item" (click)="next(cdkStepper)">
-                                        <img src="assets/icons/fa-solid_male.svg" alt="">
-                                        <p>Male</p>
-                                      </div>
-                                      <div class="gender_option_item" (click)="next(cdkStepper)">
-                                        <img src="assets/icons/fa-solid_female.svg" alt="">
-                                        <p>Female</p>
-                                      </div>
-                                    </div>
-                                  </div>
-          </cdk-step>
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
-            <div class="step_five">
-              <p class="step_header">Your location:</p>
-              <ng-select (ngModelChange)="addressAdded = true" [(ngModel)]="selectedCity" [appearance]="'outline'" class="ng-select ng_input" [placeholder]="'Enter city name'">
-                <ng-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</ng-option>
-              </ng-select>
-              <p *ngIf="!addressAdded && !selectedCity" class="validation">Please provide address</p>
-              <button class="next"  [ngClass]="!addressAdded ? 'disable' : 'next'" (click)="next(cdkStepper)">Next</button>
-            </div>
-          </cdk-step>
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet" [id]="activeStepIndex === 6 ? 'non_cursor' : ''">4</div>
 
-                    <div class="step_six">
-                      <p class="step_header">Your username and password:</p>
-                      <input type="text" class="input_item" placeholder="Username">
-                      <input type="password" class="input_item" placeholder="Password">
-                      <button class="next" (click)="next(cdkStepper)">Next</button>
-                    </div>
-          </cdk-step>
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
-
-                    <div class="step_seven">
-                      <p class="step_header">Your birthday :</p>
-                      <div class="birthday">
-                        <input class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="01" >
-                        <input class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="01" >
-                        <input class="input_item" inputmode="numeric" pattern="[0-9]*" type="number" placeholder="2000" >
-                      </div>
-                      <button class="next" (click)="next(cdkStepper)">Next</button>
-                    </div>
-          </cdk-step>
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
-                    <div class="step_eight">
-                      <p class="step_header">And lastly, What’s your email?</p>
-                      <input type="email" class="input_item" placeholder="mail@mail.com">
-                      <p class="label">In order to avoid fake
-                        profiles, we send you an email to confirm your profile
-                      </p>
-                      <button class="next" (click)="next(cdkStepper)">Next</button>
-                    </div>
-          </cdk-step>
-          <cdk-step [optional]="true">
-            <ng-template cdkStepLabel>
-              <div class="step-bullet">3</div>
-              <div class="step-title">Parcel
-                Info</div>
-            </ng-template>
-                    <div class="step_nine">
-                      <p class="step_header">Confirm your username & password</p>
-                      <input disabled type="text" class="input_item" placeholder="Username" value="KurtCobain">
-                      <input disabled type="email" class="input_item" placeholder="Username" value="mail@mail.com">
-                      <div class="md-checkbox">
-                        <input id="i2" type="checkbox" >
-                        <label for="i2">I certify that I am over 18 years old, and I have read and accept the Terms of Use and our Privacy Policy</label>
-                      </div>
-                      <button class="next">Confirm</button>
-                    </div>
-          </cdk-step>
-        </ng-stepper>
+              </ng-template>
+              <div class="step_four">
+                <p class="step_header">{{ 'dialog.location' | translate }}</p>
 
 
+                <input [(ngModel)]="selectedCity"
+                       [typeahead]="cities"
+                       class="input_item"
+                       type="search"
+                       (typeaheadOnSelect)="getselectedAdress(selectedCity); addressAdded = true"
+                       (typeaheadNoResults)="typeaheadNoResults($event)"
+                       formControlName="location"
+                       [typeaheadWaitMs]="800"
+                       placeholder="{{ 'dialog.locationPLaceholder' | translate }}"
+                       (typeaheadLoading)='getLocations($event)'
+                >
 
+                <div class="validate" *ngIf="noResult">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">
+                  {{ 'dialog.cityNotFound' | translate }}
+                </div>
 
+                <div class="validate" *ngIf="registrationForm.get('location')?.invalid && (registrationForm.get('location')?.dirty || registrationForm.get('location')?.touched)">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.locationValidation' | translate }}
+                </div>
+                <div class="gender_options">
+                  <button class="gender_option_item stepper_generic stepper_back"  (click)="back(cdkStepper)" >
+                    <p>{{ 'dialog.back' | translate }}</p>
+                  </button>
+                  <button class="gender_option_item stepper_generic" [ngClass]="{ disabled_button: !addressAdded || registrationForm.get('location')?.value.length < 4}"
+                          [disabled]="!addressAdded || registrationForm.get('location')?.value.length < 4" (click)="next(cdkStepper)" >
+                    <p>{{ 'dialog.next' | translate }}</p>
+                  </button>
+                </div>
+              </div>
+            </cdk-step>
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet" [id]="activeStepIndex === 6 ? 'non_cursor' : ''">5</div>
+              </ng-template>
+              <div class="step_five">
+                <p class="step_header">{{ 'dialog.username' | translate }}</p>
+                <input maxlength="12" [ngClass]="validateUsernameBorder()"  type="text" class="input_item" placeholder="Your username" [(ngModel)]="username" formControlName="username" (ngModelChange)="checkUSername()" >
+                <div class="validate" *ngIf="registrationForm.get('username')?.invalid && (registrationForm.get('username')?.dirty )">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">   {{ 'dialog.usernameValidation' | translate }}
+                </div>
+                <!--            <div class="validate" *ngIf="(registrationForm.get('username')?.value.length < 6) ">-->
+                <!--              <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.usernameValidationMin' | translate }}-->
+                <!--            </div>-->
+                <div class="validate" *ngIf="fieldAlreadyExists ">
+                  <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">   {{ 'dialog.fieldAlreadyExists' | translate }}
+                </div>
+                <div class="gender_options">
+                  <button class="gender_option_item stepper_generic stepper_back"  (click)="back(cdkStepper)">
+                    <p>{{ 'dialog.back' | translate }}</p>
+                  </button>
+                  <button class="gender_option_item stepper_generic" (click)="checkUsername(registrationForm,cdkStepper)" [ngClass]="{ disabled_button: registrationForm.get('username')?.invalid }"
+                          [disabled]="registrationForm.get('username')?.invalid && usernameError ">
+                    <p>{{ 'dialog.next' | translate }}</p>
+                  </button>
+                </div>
+              </div>
+            </cdk-step>
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet" [id]="activeStepIndex === 6 ? 'non_cursor' : ''" >6</div>
+              </ng-template>
 
-<!--        </form>-->
+              <p class="step_header"> {{ 'dialog.password' | translate }}</p>
+              <input maxlength="16" [ngClass]="{ validate_input: validatePasswordBorder()}" [(ngModel)]="password" type="password" class="input_item" placeholder="Your password" formControlName="password" (ngModelChange)="checkPasswordVal()">
+              <div class="validate" *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched) && !hasNumber(password)">
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.passwordValidation' | translate }}
+              </div>
+              <div class="validate" *ngIf="!checkPasswordNumber() && password.length > 6" >
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.passwordValidationNumber' | translate }}
+              </div>
+              <div class="validate" *ngIf="passwordDontMatch ">
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">   {{ 'dialog.passwordDontMatch' | translate }}
+              </div>
+              <div class="validate" *ngIf="invalidId ">
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">   invalid iD
+              </div>
+              <div class="gender_options">
+                <button class="gender_option_item stepper_generic stepper_back"  (click)="back(cdkStepper)">
+                  <p>{{ 'dialog.back' | translate }}</p>
+                </button>
+                <button class="gender_option_item stepper_generic" (click)="checkPassword(registrationForm,cdkStepper)" [ngClass]="{ disabled_button: (registrationForm.get('password')?.invalid || !hasNumber(password)) }"
+                        [disabled]="registrationForm.get('password')?.invalid">
+                  <p>{{ 'dialog.next' | translate }} </p>
+                </button>
+              </div>
+            </cdk-step>
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <div class="step-bullet">7</div>
+              </ng-template>
+              <p class="step_header"> {{ 'dialog.email' | translate }}</p>
+              <input [ngClass]="{ validate_input: registrationForm.get('email')?.invalid && this.email.length > 8}" type="email" class="input_item" placeholder="Your Email" formControlName="email" [(ngModel)]="email">
+              <div class="validate" *ngIf="fieldAlreadyExists" >
+                {{ 'dialog.fieldAlreadyExists' | translate }}
+              </div>
+              <div class="validate" *ngIf="provideValidEmail">
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">    {{ 'dialog.emailValidation' | translate }}
+              </div>
+              <alert type="success" *ngIf="success" [dismissOnTimeout]="3000">
+                {{ 'dialog.success' | translate }}
+              </alert>
+              <div class="validate" *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">  {{ 'dialog.emailValidation' | translate }}
+              </div>
+              <p class="validate" *ngIf="mailError">
+                <img src="assets/icons/ant-design_exclamation-circle-outlined.svg" alt="">{{mailValidation}}</p>
+              <div class="tick">
+                <input (change)="agree()" class="inp-cbx" id="cbx" type="checkbox" style="display: none;"/>
+                <label class="cbx" for="cbx">
+                  <div>
+                    <svg width="12px" height="9px" viewbox="0 0 12 9">
+                      <polyline points="1 5 4 8 11 1"></polyline>
+                    </svg></div>
+                </label>
+                <span>{{ 'dialog.agree' | translate }} <a class="open_terms" (click)="openTerms()">{{ 'dialog.terms' | translate }} </a> {{ 'dialog.and' | translate }} <a class="open_terms" (click)="openPrivacy()"> {{ 'dialog.privacy' | translate }}</a>.</span>
+
+              </div>
+              <div class="gender_options d-block">
+
+                <button class="gender_option_item stepper_generic w-100" aria-label="Close"  (click)="onSubmit(registrationForm); captchaRef.execute()" [ngClass]="{ disabled_button: (registrationForm.get('email')?.invalid) || !agreed }"
+                        [disabled]="registrationForm.get('email')?.invalid || !agreed ">
+                  <p> {{ 'dialog.finish' | translate }}</p>
+                </button>
+                <re-captcha  #captchaRef="reCaptcha" size="invisible" (resolved)="resolved($event)" siteKey="6LfRM3QhAAAAAF-9myDhFuQIubKjHJNIA4d3sG3Y"></re-captcha>
+              </div>
+            </cdk-step>
+          </ng-stepper>
+        </form>
       </div>
     </div>
   </div>

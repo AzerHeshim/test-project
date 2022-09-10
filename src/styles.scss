@@ -3,6 +3,8 @@
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
 
 
 *,
@@ -27,4 +29,9 @@ body {
 
 *{
   font-family: $outfit_regular, sans-serif;
+}
+
+
+.grecaptcha-badge {
+  visibility: hidden;
 }
